@@ -15,11 +15,13 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     const [lang, setLang] = useState<Lang>('en');
 
     const t = (section: string, key: string): string => {
-        const sec = (translations as Record<string, Record<string, { en: string; hu: string }>>)[section];
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const sec = (translations as any)[section];
         if (!sec) return key;
         const entry = sec[key];
         if (!entry) return key;
-        return entry[lang] || entry.en || key;
+        if (typeof entry === 'object' && entry[lang]) return entry[lang];
+        return key;
     };
 
     return (
