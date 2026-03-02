@@ -1,14 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { CreditCard, Brain, Car } from 'lucide-react';
+import { CreditCard, Brain } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { translations, Lang } from '@/lib/translations';
 
 const featureItems = [
     { key: 'splitPayment' as const, icon: CreditCard, gradient: 'from-emerald-500/20 to-teal-500/20' },
     { key: 'matchmaking' as const, icon: Brain, gradient: 'from-cyan-500/20 to-blue-500/20' },
-    { key: 'taxi' as const, icon: Car, gradient: 'from-amber-500/20 to-orange-500/20' },
 ];
 
 export default function Features() {
@@ -34,7 +33,7 @@ export default function Features() {
                 </motion.div>
 
                 {/* Feature Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
                     {featureItems.map((feature, i) => {
                         const Icon = feature.icon;
                         const featureData = translations.features[feature.key];
