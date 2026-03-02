@@ -367,7 +367,6 @@ export default function Tournament() {
                                 <h4 className="text-sm text-text-muted uppercase tracking-wider mb-2">{t('tournament', 'prizesTitle')}</h4>
                                 <div className="space-y-2">
                                     <p className="text-sm text-white">{t('tournament', 'champion')}</p>
-                                    <p className="text-sm text-text-secondary">{t('tournament', 'runnerUp')}</p>
                                 </div>
                             </div>
                         </div>
