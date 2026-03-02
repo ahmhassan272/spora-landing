@@ -141,34 +141,19 @@ function RegistrationForm() {
                     />
                 </div>
 
-                {/* Two-column row: WhatsApp + Email */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div>
-                        <label htmlFor="WhatsApp_Number" className="block text-sm font-medium text-text-secondary mb-1.5">
-                            {t('tournament', 'whatsappLabel')}
-                        </label>
-                        <input
-                            type="tel"
-                            id="WhatsApp_Number"
-                            name="WhatsApp_Number"
-                            required
-                            placeholder={t('tournament', 'whatsappPlaceholder')}
-                            className={INPUT_CLASS}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="Email" className="block text-sm font-medium text-text-secondary mb-1.5">
-                            {t('tournament', 'emailLabel')}
-                        </label>
-                        <input
-                            type="email"
-                            id="Email"
-                            name="Email"
-                            required
-                            placeholder={t('tournament', 'emailPlaceholder')}
-                            className={INPUT_CLASS}
-                        />
-                    </div>
+                {/* WhatsApp */}
+                <div>
+                    <label htmlFor="WhatsApp_Number" className="block text-sm font-medium text-text-secondary mb-1.5">
+                        {t('tournament', 'whatsappLabel')}
+                    </label>
+                    <input
+                        type="tel"
+                        id="WhatsApp_Number"
+                        name="WhatsApp_Number"
+                        required
+                        placeholder={t('tournament', 'whatsappPlaceholder')}
+                        className={INPUT_CLASS}
+                    />
                 </div>
 
                 {/* Two-column: Jersey Color + Player Count */}
@@ -252,8 +237,8 @@ function RegistrationForm() {
                     type="submit"
                     disabled={!agreed || status === 'submitting'}
                     className={`group w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-bold text-lg transition-all duration-300 cursor-pointer ${agreed
-                            ? 'bg-spora text-black hover:bg-spora-dark hover:shadow-lg hover:shadow-spora/25'
-                            : 'bg-spora/30 text-black/50 cursor-not-allowed'
+                        ? 'bg-spora text-black hover:bg-spora-dark hover:shadow-lg hover:shadow-spora/25'
+                        : 'bg-spora/30 text-black/50 cursor-not-allowed'
                         }`}
                 >
                     {status === 'submitting' ? (
