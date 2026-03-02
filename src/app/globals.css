@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #050505;
+  color: #FFFFFF;
+}
+
+::selection {
+  background-color: #1ABC9C;
+  color: #000;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1ABC9C;
+  border-radius: 3px;
+}
+
+.clip-hero {
+  clip-path: inset(0);
+}
