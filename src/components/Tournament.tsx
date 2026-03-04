@@ -370,7 +370,6 @@ export default function Tournament() {
                                         {t('tournament', 'champion').replace('The Farm Debrecen', '')}
                                         <a href="https://www.thefarmdebrecen.hu/" target="_blank" rel="noopener noreferrer" className="text-spora hover:underline">The Farm Debrecen</a>
                                     </p>
-                                    <p className="text-xs text-amber-400/90 font-medium">{t('tournament', 'championSponsor')}</p>
                                 </div>
                             </div>
                         </div>
