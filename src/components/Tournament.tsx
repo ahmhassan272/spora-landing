@@ -366,7 +366,11 @@ export default function Tournament() {
                             <div className="rounded-xl bg-darker p-5 border border-border">
                                 <h4 className="text-sm text-text-muted uppercase tracking-wider mb-2">{t('tournament', 'prizesTitle')}</h4>
                                 <div className="space-y-2">
-                                    <p className="text-sm text-white">{t('tournament', 'champion')}</p>
+                                    <p className="text-sm text-white">
+                                        {t('tournament', 'champion').replace('The Farm Debrecen', '')}
+                                        <a href="https://www.thefarmdebrecen.hu/" target="_blank" rel="noopener noreferrer" className="text-spora hover:underline">The Farm Debrecen</a>
+                                    </p>
+                                    <p className="text-xs text-amber-400/90 font-medium">{t('tournament', 'championSponsor')}</p>
                                 </div>
                             </div>
                         </div>

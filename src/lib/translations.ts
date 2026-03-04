@@ -59,14 +59,15 @@ export const translations = {
         },
         dates: { en: '7 – 8 March 2026', hu: '2026. Március 7 – 8.' },
         time: { en: '20:00 – 23:00', hu: '20:00 – 23:00' },
-        location: { en: 'Pallag by Bestrong', hu: 'Pallag, Bestrong' },
+        location: { en: 'Bestrong, Pallag', hu: 'Bestrong, Pallag' },
         entryFee: { en: '15,000 HUF per Team', hu: '15 000 HUF / Csapat' },
         paidBy: { en: 'Paid by Captain', hu: 'Csapatkapitány fizeti' },
         format: { en: '6v6 (1 GK + 5 Outfield)', hu: '6v6 (1 kapus + 5 mezőnyjátékos)' },
         teams: { en: '8 Teams Maximum', hu: 'Maximum 8 Csapat' },
         matchDuration: { en: '20-Minute Matches', hu: '20 Perces Meccsek' },
         prizesTitle: { en: 'Prizes', hu: 'Díjak' },
-        champion: { en: '🏆 Champions: 13,000 HUF Spora App Credits', hu: '🏆 Bajnok: 13 000 HUF Spora App Kredit' },
+        champion: { en: '🏆 Champions: 20,000 HUF Voucher for The Farm Debrecen', hu: '🏆 Bajnok: 20 000 HUF Utalvány a The Farm Debrecen-be' },
+        championSponsor: { en: '🍔 Your Team\'s Iftar is on us! Sponsored by The Farm.', hu: '🍔 Csapatod iftárja ránk megy! Szponzor: The Farm.' },
         register: { en: 'Register via WhatsApp', hu: 'Regisztrálj WhatsApp-on' },
         daysLabel: { en: 'Days', hu: 'Nap' },
         hoursLabel: { en: 'Hours', hu: 'Óra' },
@@ -101,8 +102,8 @@ export const translations = {
         privacyTitle: { en: 'Privacy Policy', hu: 'Adatvédelmi Tájékoztató' },
         termsTitle: { en: 'Terms of Service', hu: 'Általános Szerződési Feltételek' },
         privacyContent: {
-            en: 'Spora Digital Kft. operates as an intermediary platform connecting amateur football players with sports venue operators in Debrecen, Hungary. We are fully GDPR compliant. Personal data (name, email, phone number) is collected solely for the purpose of booking management, player matching, and payment processing. Data is stored securely within the EU and is never sold to third parties. Users may request data deletion at any time by contacting us at info@spora.hu. By using our platform, you consent to the collection and processing of your data as described herein.',
-            hu: 'A Spora Digital Kft. közvetítő platformként működik, amely amatőr labdarúgókat köt össze sportlétesítmény-üzemeltetőkkel Debrecenben, Magyarországon. Teljes mértékben megfelelünk a GDPR előírásainak. Személyes adatokat (név, e-mail, telefonszám) kizárólag foglaláskezelés, játékos-összeállítás és fizetésfeldolgozás céljából gyűjtünk. Az adatokat biztonságosan, az EU-n belül tároljuk, és soha nem adjuk el harmadik félnek. A felhasználók bármikor kérhetik adataik törlését az info@spora.hu címen. Platformunk használatával hozzájárul adatai jelen leírás szerinti gyűjtéséhez és feldolgozásához.',
+            en: 'Spora Digital Kft. operates as an intermediary platform connecting amateur football players with sports venue operators in Debrecen, Hungary. We are fully GDPR compliant. Personal data (name, email, phone number) is collected solely for the purpose of booking management, player matching, and payment processing. Data is stored securely within the EU and is never sold to third parties. Users may request data deletion at any time by contacting us at admin@spora-hu.app. By using our platform, you consent to the collection and processing of your data as described herein.',
+            hu: 'A Spora Digital Kft. közvetítő platformként működik, amely amatőr labdarúgókat köt össze sportlétesítmény-üzemeltetőkkel Debrecenben, Magyarországon. Teljes mértékben megfelelünk a GDPR előírásainak. Személyes adatokat (név, e-mail, telefonszám) kizárólag foglaláskezelés, játékos-összeállítás és fizetésfeldolgozás céljából gyűjtünk. Az adatokat biztonságosan, az EU-n belül tároljuk, és soha nem adjuk el harmadik félnek. A felhasználók bármikor kérhetik adataik törlését az admin@spora-hu.app címen. Platformunk használatával hozzájárul adatai jelen leírás szerinti gyűjtéséhez és feldolgozásához.',
         },
         termsContent: {
             en: 'Spora Digital Kft. provides a digital intermediary service for amateur sports organization. We do not own or operate any sports venues. Venue availability, pricing, and conditions are set by the respective venue operators. Spora facilitates bookings and payments but is not liable for venue conditions, player injuries, or disputes between users. The split-payment system requires all designated players to complete payment within 2 hours of the initial booking, or the reservation is automatically released. Tournament entry fees are non-refundable once registration is confirmed. All users must be 16 years of age or older. These terms are governed by Hungarian law.',
@@ -116,6 +117,7 @@ export const translations = {
         quickLinks: { en: 'Quick Links', hu: 'Gyors Linkek' },
         contact: { en: 'Contact', hu: 'Kapcsolat' },
         whatsapp: { en: 'WhatsApp', hu: 'WhatsApp' },
+        email: { en: 'admin@spora-hu.app', hu: 'admin@spora-hu.app' },
     },
 } as const;
 

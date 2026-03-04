@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { MessageCircle } from 'lucide-react';
+import { MessageCircle, Mail } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import Image from 'next/image';
 
@@ -49,15 +49,24 @@ export default function Footer() {
                     {/* Contact */}
                     <div>
                         <h4 className="font-semibold text-white mb-4">{t('footer', 'contact')}</h4>
-                        <a
-                            href="https://wa.me/36702538983"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 text-sm text-text-secondary hover:text-spora transition-colors"
-                        >
-                            <MessageCircle size={16} />
-                            {t('footer', 'whatsapp')}
-                        </a>
+                        <div className="space-y-3">
+                            <a
+                                href="https://wa.me/36702538983"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2 text-sm text-text-secondary hover:text-spora transition-colors"
+                            >
+                                <MessageCircle size={16} />
+                                {t('footer', 'whatsapp')}
+                            </a>
+                            <a
+                                href="mailto:admin@spora-hu.app"
+                                className="flex items-center gap-2 text-sm text-text-secondary hover:text-spora transition-colors"
+                            >
+                                <Mail size={16} />
+                                {t('footer', 'email')}
+                            </a>
+                        </div>
                     </div>
                 </div>
 
