@@ -31,7 +31,7 @@ const FIXTURES_B = [
 ];
 
 const TOP_SCORERS = [
-    { name: 'Dani Ltaif', team: 'Warriors FC', goals: 8 },
+    { name: 'Dani Abo Ltaif', team: 'Warriors FC', goals: 8 },
     { name: 'Usman Ali-Concern', team: 'Ashawo FC', goals: 8 },
     { name: 'Tammem Hamda', team: 'Saraya Al-Quds', goals: 5 },
     { name: 'Adham Aboushebeka', team: 'Ay Caramba', goals: 4 },
