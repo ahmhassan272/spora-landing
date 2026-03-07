@@ -21,7 +21,7 @@ const GROUP_B = [
 const FIXTURES_A = [
     { round: 1, time: '20:30 – 21:00', home: 'Ay Caramba', away: 'El Madfa3geya' },
     { round: 2, time: '21:05 – 21:35', home: 'El Madfa3geya', away: 'Ashawo FC' },
-    { round: 3, time: '21:40 – 22:10', home: 'Ay Caramba', away: 'Ashawo FC' },
+    { round: 3, time: '21:40 – 22:10', home: 'Ashawo FC', away: 'Ay Caramba' },
 ];
 
 const FIXTURES_B = [
@@ -31,11 +31,11 @@ const FIXTURES_B = [
 ];
 
 const TOP_SCORERS = [
-    { name: 'Dani Abo Latif', team: 'Warriors FC', goals: 8 },
+    { name: 'Dani Ltaif', team: 'Warriors FC', goals: 8 },
     { name: 'Usman Ali-Concern', team: 'Ashawo FC', goals: 8 },
     { name: 'Tammem Hamda', team: 'Saraya Al-Quds', goals: 5 },
-    { name: 'Adham Aboshebeka', team: 'Mangoes', goals: 4 },
-    { name: 'Ahmed Nahasa', team: 'Saraya Al-Quds', goals: 4 },
+    { name: 'Adham Aboushebeka', team: 'Ay Caramba', goals: 4 },
+    { name: 'Ahmed Nehasa', team: 'Ay Caramba', goals: 4 },
 ];
 
 /* ─── COMPONENTS ─── */
