@@ -313,49 +313,48 @@ export default function Tournament() {
                             </div>
                         </div>
 
-                        {/* WhatsApp + Email */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label htmlFor="WhatsApp_Number" className="block text-sm font-medium text-text-secondary mb-1.5">
-                                    Captain&apos;s WhatsApp Number
-                                </label>
-                                <input
-                                    type="tel"
-                                    id="WhatsApp_Number"
-                                    name="WhatsApp_Number"
-                                    required
-                                    placeholder="+36 70 123 4567"
-                                    className={INPUT_CLASS}
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="Captain_Email" className="block text-sm font-medium text-text-secondary mb-1.5">
-                                    Captain&apos;s Email
-                                </label>
-                                <input
-                                    type="email"
-                                    id="Captain_Email"
-                                    name="Captain_Email"
-                                    required
-                                    placeholder="captain@email.com"
-                                    className={INPUT_CLASS}
-                                />
-                            </div>
+                        {/* WhatsApp */}
+                        <div>
+                            <label htmlFor="WhatsApp_Number" className="block text-sm font-medium text-text-secondary mb-1.5">
+                                Captain&apos;s WhatsApp Number
+                            </label>
+                            <input
+                                type="tel"
+                                id="WhatsApp_Number"
+                                name="WhatsApp_Number"
+                                required
+                                placeholder="+36 70 123 4567"
+                                className={INPUT_CLASS}
+                            />
                         </div>
 
-                        {/* Teammate Roster */}
+                        {/* Squad Registration */}
                         <div>
-                            <label htmlFor="Teammate_Roster" className="block text-sm font-medium text-text-secondary mb-1.5">
-                                Teammate Roster
-                            </label>
-                            <textarea
-                                id="Teammate_Roster"
-                                name="Teammate_Roster"
-                                rows={5}
-                                required
-                                placeholder="Enter your roster's First and Last Names (Max 12 players for the season, Max 10 per matchday)"
-                                className={`${INPUT_CLASS} resize-none`}
-                            />
+                            <h4 className="text-sm font-semibold text-white mb-1">Squad Registration</h4>
+                            <p className="text-xs text-text-muted mb-4">Captain = Player 1 (captured above). Enter First &amp; Last Name for each player.</p>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                {/* Players 2–10 (required) */}
+                                {Array.from({ length: 9 }, (_, i) => i + 2).map((n) => (
+                                    <input
+                                        key={n}
+                                        type="text"
+                                        name={`Player_${n}`}
+                                        required
+                                        placeholder={`Player ${n} — First & Last Name (Required)`}
+                                        className={INPUT_CLASS}
+                                    />
+                                ))}
+                                {/* Players 11–12 (optional) */}
+                                {[11, 12].map((n) => (
+                                    <input
+                                        key={n}
+                                        type="text"
+                                        name={`Player_${n}`}
+                                        placeholder={`Player ${n} — First & Last Name (Optional)`}
+                                        className={INPUT_CLASS}
+                                    />
+                                ))}
+                            </div>
                         </div>
 
                         {/* Submit Button */}
