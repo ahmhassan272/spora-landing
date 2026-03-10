@@ -1,301 +1,372 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Calendar, Clock, MapPin, Users, Trophy, Swords, Target, CheckCircle } from 'lucide-react';
+import { Trophy, Calendar, Users, Video, BarChart3, Shield, Zap, Star, ArrowRight, Award, Target, Shirt } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 
-/* ─── EDITABLE DATA: Update these arrays as the tournament progresses ─── */
+const INPUT_CLASS = "w-full px-4 py-3 rounded-xl bg-[#0d0d1a] border border-[#2a2a3a] text-white placeholder:text-[#555] text-sm focus:outline-none focus:border-spora focus:ring-1 focus:ring-spora transition-colors";
 
-const GROUP_A = [
-    { team: 'Ay Caramba', p: 2, w: 1, d: 1, l: 0, gd: 7, pts: 4, qualified: true },
-    { team: 'Ashawo FC', p: 2, w: 1, d: 1, l: 0, gd: 4, pts: 4, qualified: true },
-    { team: 'El Madfa3geya', p: 2, w: 0, d: 0, l: 2, gd: -11, pts: 0, qualified: false },
+/* ─── FORMAT DATA ─── */
+
+const FORMAT_CARDS = [
+    {
+        icon: Shield,
+        title: '6-Game Guarantee',
+        desc: 'Every team plays exactly 6 matches. 48 matches total across 4 weeks.',
+        accent: 'from-emerald-500/20 to-teal-500/20',
+    },
+    {
+        icon: Users,
+        title: 'Weeks 1 & 2 — Group Stage',
+        desc: '4 groups of 4 teams. Round-robin format. Every match matters.',
+        accent: 'from-cyan-500/20 to-blue-500/20',
+    },
+    {
+        icon: Zap,
+        title: 'The Split',
+        desc: 'Top 2 advance to the Gold Cup. Bottom 2 drop to the Silver Cup.',
+        accent: 'from-amber-500/20 to-orange-500/20',
+    },
+    {
+        icon: Trophy,
+        title: 'Weeks 3 & 4 — Knockouts',
+        desc: 'Knockouts & placements for a true 1st–16th global ranking.',
+        accent: 'from-purple-500/20 to-pink-500/20',
+    },
 ];
 
-const GROUP_B = [
-    { team: 'Warriors FC', p: 2, w: 1, d: 1, l: 0, gd: 7, pts: 4, qualified: true },
-    { team: 'Wolves', p: 2, w: 1, d: 1, l: 0, gd: 1, pts: 4, qualified: true },
-    { team: 'Chabibet 3omrane', p: 2, w: 0, d: 0, l: 2, gd: -8, pts: 0, qualified: false },
+const PRIZES = [
+    { emoji: '🥇', title: 'Gold Champions', items: ['Trophy', 'FREE next entry', 'Be Strong trial', 'VIP Team Dinner at Mélange'] },
+    { emoji: '🥈🥉', title: 'Podium (2nd & 3rd)', items: ['Massive sponsor vouchers'] },
+    { emoji: '🏆', title: 'Silver Champions (9th Overall)', items: ['Trophy & exclusive lower-bracket rewards'] },
+    { emoji: '🏅', title: 'Individual Honors', items: ['MVP', 'Top Scorer', 'Top Assister', 'Best Keeper'] },
 ];
-
-const DAY1_RESULTS = [
-    { home: 'Ay Caramba', away: 'El Madfa3geya', scoreH: 7, scoreA: 0 },
-    { home: 'El Madfa3geya', away: 'Ashawo FC', scoreH: 0, scoreA: 4 },
-    { home: 'Ashawo FC', away: 'Ay Caramba', scoreH: 4, scoreA: 4 },
-    { home: 'Warriors FC', away: 'Wolves', scoreH: 2, scoreA: 2 },
-    { home: 'Wolves', away: 'Chabibet 3omrane', scoreH: 3, scoreA: 2 },
-    { home: 'Warriors FC', away: 'Chabibet 3omrane', scoreH: 7, scoreA: 0 },
-];
-
-const FINALS_SCHEDULE = [
-    { time: '20:30', label: 'SEMI-FINAL 1', home: 'Ay Caramba', away: 'Wolves' },
-    { time: '20:55', label: 'SEMI-FINAL 2', home: 'Warriors FC', away: 'Ashawo FC' },
-    { time: '21:30', label: 'GRAND FINAL', home: 'Winner SF 1', away: 'Winner SF 2' },
-];
-
-const TOP_SCORERS = [
-    { name: 'Dani Ltaif', team: 'Warriors FC', goals: 12 },
-    { name: 'Usman Ali-Concern', team: 'Ashawo FC', goals: 11 },
-    { name: 'Adham Abushebeka', team: 'Ay Caramba', goals: 10 },
-    { name: 'Ahmed Nehasa', team: 'Ay Caramba', goals: 7 },
-    { name: 'Tammem Hamda', team: 'Saraya Al-Quds', goals: 5 },
-];
-
-/* ─── COMPONENTS ─── */
-
-const TABLE_COLS = ['Team', 'P', 'W', 'D', 'L', 'GD', 'Pts'];
-
-function StandingsTable({ title, teams }: { title: string; teams: typeof GROUP_A }) {
-    return (
-        <div>
-            <h3 className="text-lg sm:text-xl font-bold text-white mb-3">{title}</h3>
-            <div className="overflow-x-auto rounded-xl border border-gray-700">
-                <table className="w-full text-sm">
-                    <thead>
-                        <tr className="bg-spora/20 text-spora">
-                            {TABLE_COLS.map((col) => (
-                                <th
-                                    key={col}
-                                    className={`py-3 px-3 font-semibold uppercase tracking-wider text-xs ${col === 'Team' ? 'text-left' : 'text-center'}`}
-                                >
-                                    {col}
-                                </th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody className="bg-gray-800/60">
-                        {teams.map((row, i) => (
-                            <tr
-                                key={i}
-                                className={`border-t border-gray-700/60 hover:bg-gray-700/30 transition-colors ${row.qualified ? 'border-l-2 border-l-spora' : ''}`}
-                            >
-                                <td className="py-3 px-3 font-medium text-white whitespace-nowrap">
-                                    <span className="flex items-center gap-2">
-                                        {row.team}
-                                        {row.qualified && (
-                                            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-spora/15 text-spora text-[10px] font-bold uppercase tracking-wider">
-                                                <CheckCircle size={10} />
-                                                Q
-                                            </span>
-                                        )}
-                                    </span>
-                                </td>
-                                <td className="py-3 px-3 text-center text-text-secondary tabular-nums">{row.p}</td>
-                                <td className="py-3 px-3 text-center text-text-secondary tabular-nums">{row.w}</td>
-                                <td className="py-3 px-3 text-center text-text-secondary tabular-nums">{row.d}</td>
-                                <td className="py-3 px-3 text-center text-text-secondary tabular-nums">{row.l}</td>
-                                <td className="py-3 px-3 text-center text-text-secondary tabular-nums">{row.gd >= 0 ? `+${row.gd}` : row.gd}</td>
-                                <td className="py-3 px-3 text-center font-bold text-spora tabular-nums">{row.pts}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    );
-}
-
-function ResultCard({ home, away, scoreH, scoreA }: { home: string; away: string; scoreH: number; scoreA: number }) {
-    return (
-        <div className="flex items-center justify-between gap-2 p-3 rounded-xl bg-gray-800/60 border border-gray-700/60">
-            <span className="text-xs sm:text-sm text-text-secondary font-medium text-right flex-1 truncate">{home}</span>
-            <div className="flex items-center gap-1.5 shrink-0 px-2">
-                <span className={`text-base font-bold tabular-nums ${scoreH > scoreA ? 'text-spora' : scoreH === scoreA ? 'text-amber-400' : 'text-text-muted'}`}>{scoreH}</span>
-                <span className="text-xs text-text-muted">–</span>
-                <span className={`text-base font-bold tabular-nums ${scoreA > scoreH ? 'text-spora' : scoreA === scoreH ? 'text-amber-400' : 'text-text-muted'}`}>{scoreA}</span>
-            </div>
-            <span className="text-xs sm:text-sm text-text-secondary font-medium text-left flex-1 truncate">{away}</span>
-        </div>
-    );
-}
 
 /* ─── MAIN COMPONENT ─── */
 
 export default function Tournament() {
     const { t } = useLanguage();
 
-    const details = [
-        { icon: Calendar, label: t('tournament', 'dates') },
-        { icon: Clock, label: t('tournament', 'time') },
-        { icon: MapPin, label: t('tournament', 'location') },
-        { icon: Swords, label: t('tournament', 'format') },
-        { icon: Users, label: t('tournament', 'teams') },
-        { icon: Clock, label: t('tournament', 'matchDuration') },
-    ];
-
     return (
         <section id="tournament" className="py-24 sm:py-32 relative">
-            {/* Background accent */}
+            {/* Background */}
             <div className="absolute inset-0 bg-gradient-to-b from-darker via-spora/5 to-darker" />
 
             <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Section Header */}
+
+                {/* ─── HERO HEADER ─── */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-100px' }}
+                    viewport={{ once: true, margin: '-80px' }}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-10"
+                    className="text-center mb-14"
                 >
-                    {/* LIVE Badge */}
-                    <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-spora/10 border border-spora/30 text-sm font-bold mb-5">
-                        <span className="relative flex h-3 w-3">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-spora opacity-75" />
-                            <span className="relative inline-flex rounded-full h-3 w-3 bg-spora" />
-                        </span>
-                        <span className="text-spora">🔴 TOURNAMENT LIVE</span>
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-spora/10 border border-spora/20 text-spora text-sm font-medium mb-5">
+                        <Trophy size={14} />
+                        NEW SEASON
                     </div>
 
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-                        {t('tournament', 'title')}
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
+                        🏆 Spora Super Cup
+                        <br />
+                        <span className="text-spora">Spring Blitz</span>
                     </h2>
-                    <p className="text-text-secondary text-lg max-w-xl mx-auto">
-                        {t('tournament', 'subtitle')}
+
+                    <p className="text-text-secondary text-base sm:text-lg max-w-2xl mx-auto mb-8">
+                        Debrecen&apos;s Ultimate 4-Week 6v6 League. 4K AI Cameras. 250,000 HUF Prize Pool.
                     </p>
+
+                    {/* Badges */}
+                    <div className="flex flex-wrap items-center justify-center gap-3">
+                        {[
+                            { icon: Calendar, text: 'Starts March 28th' },
+                            { icon: Users, text: 'Strictly 16 Teams' },
+                            { icon: Shield, text: '6-Game Guarantee' },
+                        ].map((badge, i) => (
+                            <div
+                                key={i}
+                                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-card border border-border text-sm text-white font-medium"
+                            >
+                                <badge.icon size={14} className="text-spora" />
+                                {badge.text}
+                            </div>
+                        ))}
+                    </div>
                 </motion.div>
 
-                {/* Tournament Info Card */}
+                {/* ─── THE FORMAT ─── */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.1 }}
+                    className="mb-14"
+                >
+                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-6 text-center">The Format</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {FORMAT_CARDS.map((card, i) => {
+                            const Icon = card.icon;
+                            return (
+                                <div
+                                    key={i}
+                                    className="group rounded-2xl bg-card border border-border p-6 hover:border-spora/40 transition-all duration-300"
+                                >
+                                    <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${card.accent} flex items-center justify-center mb-4`}>
+                                        <Icon size={22} className="text-white" />
+                                    </div>
+                                    <h4 className="font-bold text-white mb-1.5">{card.title}</h4>
+                                    <p className="text-sm text-text-secondary leading-relaxed">{card.desc}</p>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </motion.div>
+
+                {/* ─── PRO OPERATIONS & MEDIA ─── */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.15 }}
-                    className="rounded-2xl bg-card border border-border overflow-hidden mb-10"
+                    className="mb-14"
                 >
-                    {/* Details Grid */}
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-px bg-border">
-                        {details.map((detail, i) => {
-                            const Icon = detail.icon;
+                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-6 text-center">Pro Operations &amp; Media</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        {[
+                            {
+                                icon: Shirt,
+                                title: 'Match Day',
+                                items: ['40-min matches', 'Pro referees', 'Hydration provided'],
+                            },
+                            {
+                                icon: Video,
+                                title: '4K AI Recording',
+                                items: ['XbotGo Falcon camera', 'Pro scouting footage', '"Moment of the Week" votes'],
+                            },
+                            {
+                                icon: BarChart3,
+                                title: 'Deep Stats',
+                                items: ['Goals & Assists', 'Clean Sheets', 'MVP Awards'],
+                            },
+                        ].map((card, i) => {
+                            const Icon = card.icon;
                             return (
-                                <div key={i} className="bg-card p-5 sm:p-6 flex items-center gap-3">
-                                    <Icon size={20} className="text-spora shrink-0" />
-                                    <span className="text-sm text-text-secondary">{detail.label}</span>
+                                <div key={i} className="rounded-2xl bg-card border border-border p-6">
+                                    <Icon size={24} className="text-spora mb-3" />
+                                    <h4 className="font-bold text-white mb-3">{card.title}</h4>
+                                    <ul className="space-y-1.5">
+                                        {card.items.map((item, j) => (
+                                            <li key={j} className="flex items-start gap-2 text-sm text-text-secondary">
+                                                <span className="text-spora mt-0.5 shrink-0">•</span>
+                                                {item}
+                                            </li>
+                                        ))}
+                                    </ul>
                                 </div>
                             );
                         })}
                     </div>
+                </motion.div>
 
-                    {/* Entry Fee & Prizes */}
-                    <div className="p-6 sm:p-8 border-t border-border">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div className="rounded-xl bg-darker p-5 border border-border">
-                                <h4 className="text-sm text-text-muted uppercase tracking-wider mb-2">{t('tournament', 'entryFeeLabel')}</h4>
-                                <p className="text-2xl font-bold text-white">{t('tournament', 'entryFee')}</p>
-                                <p className="text-sm text-text-muted mt-1">{t('tournament', 'paidBy')}</p>
+                {/* ─── THE FINANCES ─── */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="mb-14"
+                >
+                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-6 text-center">The Finances</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {/* Registration */}
+                        <div className="rounded-2xl bg-card border border-spora/30 p-6 relative overflow-hidden">
+                            <div className="absolute top-0 right-0 px-3 py-1 bg-spora text-black text-[10px] font-bold uppercase tracking-wider rounded-bl-xl">
+                                One-Time
                             </div>
-                            <div className="rounded-xl bg-darker p-5 border border-border">
-                                <h4 className="text-sm text-text-muted uppercase tracking-wider mb-2">{t('tournament', 'prizesTitle')}</h4>
-                                <p className="text-sm text-white leading-relaxed">
-                                    {t('tournament', 'champion').replace('The Farm Debrecen', '')}
-                                    <a href="https://www.thefarmdebrecen.hu/" target="_blank" rel="noopener noreferrer" className="text-spora hover:underline">The Farm Debrecen</a>
+                            <p className="text-sm text-text-muted uppercase tracking-wider mb-2">Registration</p>
+                            <p className="text-4xl font-extrabold text-white mb-1">14,000 <span className="text-lg font-medium text-text-muted">HUF</span></p>
+                            <p className="text-sm text-text-secondary">One-time fee to secure your spot</p>
+                        </div>
+
+                        {/* Matchday */}
+                        <div className="rounded-2xl bg-card border border-border p-6 relative overflow-hidden">
+                            <div className="absolute top-0 right-0 px-3 py-1 bg-gray-700 text-text-muted text-[10px] font-bold uppercase tracking-wider rounded-bl-xl">
+                                Weekly
+                            </div>
+                            <p className="text-sm text-text-muted uppercase tracking-wider mb-2">Matchday Fee</p>
+                            <p className="text-4xl font-extrabold text-white mb-1">12,000 <span className="text-lg font-medium text-text-muted">HUF</span></p>
+                            <p className="text-sm text-text-secondary">Per team, per week</p>
+                            <div className="mt-3 px-3 py-2 rounded-lg bg-spora/10 border border-spora/20">
+                                <p className="text-xs text-spora font-medium text-center">
+                                    💡 For a 10-man squad, that&apos;s just <strong>1,200 HUF</strong> per player/week
                                 </p>
                             </div>
                         </div>
                     </div>
                 </motion.div>
 
-                {/* ── GROUP STANDINGS ── */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10"
-                >
-                    <StandingsTable title="Group A" teams={GROUP_A} />
-                    <StandingsTable title="Group B" teams={GROUP_B} />
-                </motion.div>
-
-                {/* ── FINALS DAY SCHEDULE ── */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.22 }}
-                    className="mb-10"
-                >
-                    <h3 className="text-lg sm:text-xl font-bold text-white mb-1 flex items-center gap-2">
-                        <Trophy size={20} className="text-spora" />
-                        Finals Day — Sunday 8/3
-                    </h3>
-                    <p className="text-xs text-text-muted mb-4">📍 BeStrong Pallag</p>
-                    <div className="space-y-3">
-                        {FINALS_SCHEDULE.map((match, i) => (
-                            <div
-                                key={i}
-                                className={`flex items-center gap-3 p-4 rounded-xl border transition-colors ${match.label === 'GRAND FINAL'
-                                        ? 'bg-spora/10 border-spora/30'
-                                        : 'bg-gray-800/60 border-gray-700/60'
-                                    }`}
-                            >
-                                <div className="shrink-0 w-14 text-center">
-                                    <span className="text-sm font-bold text-spora tabular-nums">{match.time}</span>
-                                </div>
-                                <div className="shrink-0">
-                                    <span className={`inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${match.label === 'GRAND FINAL'
-                                            ? 'bg-spora/20 text-spora'
-                                            : 'bg-gray-700 text-text-muted'
-                                        }`}>
-                                        {match.label}
-                                    </span>
-                                </div>
-                                <div className="flex-1 flex items-center justify-center gap-2 text-sm">
-                                    <span className="text-text-secondary font-medium text-right flex-1 truncate">{match.home}</span>
-                                    <span className="text-xs text-text-muted">vs</span>
-                                    <span className="text-text-secondary font-medium text-left flex-1 truncate">{match.away}</span>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </motion.div>
-
-                {/* ── DAY 1 RESULTS ── */}
+                {/* ─── 250,000 HUF PRIZE POOL ─── */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.25 }}
-                    className="mb-10"
+                    className="mb-14"
                 >
-                    <h3 className="text-lg sm:text-xl font-bold text-white mb-3">Day 1 Results</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        {DAY1_RESULTS.map((r, i) => (
-                            <ResultCard key={i} {...r} />
+                    <div className="text-center mb-6">
+                        <h3 className="text-xl sm:text-2xl font-bold text-white">250,000 HUF Prize Pool</h3>
+                        <p className="text-sm text-text-muted mt-1">Rewards at every level</p>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {PRIZES.map((p, i) => (
+                            <div
+                                key={i}
+                                className={`rounded-2xl p-5 border ${i === 0 ? 'bg-spora/10 border-spora/30' : 'bg-card border-border'}`}
+                            >
+                                <div className="flex items-center gap-2 mb-3">
+                                    <span className="text-xl">{p.emoji}</span>
+                                    <h4 className="font-bold text-white text-sm">{p.title}</h4>
+                                </div>
+                                <div className="flex flex-wrap gap-2">
+                                    {p.items.map((item, j) => (
+                                        <span
+                                            key={j}
+                                            className={`inline-block px-2.5 py-1 rounded-lg text-xs font-medium ${i === 0 ? 'bg-spora/20 text-spora' : 'bg-gray-800 text-text-secondary'}`}
+                                        >
+                                            {item}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
                         ))}
                     </div>
                 </motion.div>
 
-                {/* ── TOP SCORERS ── */}
+                {/* ─── REGISTRATION FORM ─── */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.3 }}
+                    className="rounded-2xl bg-card border border-border p-6 sm:p-8"
                 >
-                    <h3 className="text-lg sm:text-xl font-bold text-white mb-4 flex items-center gap-2">
-                        <Target size={20} className="text-spora" />
-                        Top Scorers
-                    </h3>
-                    <div className="rounded-xl border border-gray-700 overflow-hidden">
-                        {TOP_SCORERS.map((scorer, i) => (
-                            <div
-                                key={i}
-                                className={`flex items-center gap-4 px-4 sm:px-5 py-3.5 ${i > 0 ? 'border-t border-gray-700/60' : ''} ${i < 3 ? 'bg-spora/5' : 'bg-gray-800/40'} hover:bg-gray-700/30 transition-colors`}
-                            >
-                                <span className={`text-lg font-bold tabular-nums w-7 text-center ${i < 3 ? 'text-spora' : 'text-text-muted'}`}>
-                                    {i + 1}
-                                </span>
-                                <div className="flex-1 min-w-0">
-                                    <p className="text-sm font-medium text-white truncate">{scorer.name}</p>
-                                    <p className="text-xs text-text-muted truncate">{scorer.team}</p>
-                                </div>
-                                <div className="flex items-center gap-1.5 shrink-0">
-                                    <span className="text-xl font-bold text-spora tabular-nums">{scorer.goals}</span>
-                                    <span className="text-xs text-text-muted">⚽</span>
-                                </div>
-                            </div>
-                        ))}
+                    <div className="text-center mb-8">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-spora/10 border border-spora/20 text-spora text-xs font-bold uppercase tracking-wider mb-3">
+                            <Star size={12} />
+                            Registration Open
+                        </div>
+                        <h3 className="text-xl sm:text-2xl font-bold text-white">Register Your Squad</h3>
                     </div>
+
+                    <form
+                        action="https://formsubmit.co/Aalsayed212@gmail.com"
+                        method="POST"
+                        className="space-y-5"
+                    >
+                        {/* Hidden inputs */}
+                        <input type="hidden" name="_captcha" value="false" />
+                        <input type="hidden" name="_subject" value="🚨 NEW SPRING BLITZ TEAM REGISTRATION!" />
+
+                        {/* Team Name */}
+                        <div>
+                            <label htmlFor="Team_Name" className="block text-sm font-medium text-text-secondary mb-1.5">
+                                Team Name
+                            </label>
+                            <input
+                                type="text"
+                                id="Team_Name"
+                                name="Team_Name"
+                                required
+                                placeholder="e.g. FC Thunder"
+                                className={INPUT_CLASS}
+                            />
+                        </div>
+
+                        {/* Captain Name — two columns */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label htmlFor="Captain_First_Name" className="block text-sm font-medium text-text-secondary mb-1.5">
+                                    Captain&apos;s First Name
+                                </label>
+                                <input
+                                    type="text"
+                                    id="Captain_First_Name"
+                                    name="Captain_First_Name"
+                                    required
+                                    placeholder="Ahmed"
+                                    className={INPUT_CLASS}
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="Captain_Last_Name" className="block text-sm font-medium text-text-secondary mb-1.5">
+                                    Captain&apos;s Last Name
+                                </label>
+                                <input
+                                    type="text"
+                                    id="Captain_Last_Name"
+                                    name="Captain_Last_Name"
+                                    required
+                                    placeholder="Hassan"
+                                    className={INPUT_CLASS}
+                                />
+                            </div>
+                        </div>
+
+                        {/* WhatsApp + Email */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label htmlFor="WhatsApp_Number" className="block text-sm font-medium text-text-secondary mb-1.5">
+                                    Captain&apos;s WhatsApp Number
+                                </label>
+                                <input
+                                    type="tel"
+                                    id="WhatsApp_Number"
+                                    name="WhatsApp_Number"
+                                    required
+                                    placeholder="+36 70 123 4567"
+                                    className={INPUT_CLASS}
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="Captain_Email" className="block text-sm font-medium text-text-secondary mb-1.5">
+                                    Captain&apos;s Email
+                                </label>
+                                <input
+                                    type="email"
+                                    id="Captain_Email"
+                                    name="Captain_Email"
+                                    required
+                                    placeholder="captain@email.com"
+                                    className={INPUT_CLASS}
+                                />
+                            </div>
+                        </div>
+
+                        {/* Teammate Roster */}
+                        <div>
+                            <label htmlFor="Teammate_Roster" className="block text-sm font-medium text-text-secondary mb-1.5">
+                                Teammate Roster
+                            </label>
+                            <textarea
+                                id="Teammate_Roster"
+                                name="Teammate_Roster"
+                                rows={5}
+                                required
+                                placeholder="Enter your roster's First and Last Names (Max 12 players for the season, Max 10 per matchday)"
+                                className={`${INPUT_CLASS} resize-none`}
+                            />
+                        </div>
+
+                        {/* Submit Button */}
+                        <button
+                            type="submit"
+                            className="group w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-spora text-black font-bold text-lg hover:bg-spora-dark hover:shadow-lg hover:shadow-spora/25 transition-all duration-300 cursor-pointer"
+                        >
+                            Lock In Our Squad (14,000 HUF Deposit)
+                            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                        </button>
+                    </form>
                 </motion.div>
             </div>
         </section>

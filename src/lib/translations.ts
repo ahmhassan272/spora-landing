@@ -12,7 +12,7 @@ export const translations = {
             hu: 'A legokosabb módja az amatőr foci szervezésének Debrecenben. Foglalj pályát, találj játékosokat és versenyezz — egy platformon.',
         },
         cta: { en: 'Book Now', hu: 'Foglalj Most' },
-        ctaSecondary: { en: 'Ramadan Cup #002', hu: 'Ramadán Kupa #002' },
+        ctaSecondary: { en: 'Spring Blitz ⚡', hu: 'Spring Blitz ⚡' },
     },
     features: {
         title: { en: 'Why Spora?', hu: 'Miért Spora?' },
