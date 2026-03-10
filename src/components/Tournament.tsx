@@ -330,29 +330,50 @@ export default function Tournament() {
 
                         {/* Squad Registration */}
                         <div>
-                            <h4 className="text-sm font-semibold text-white mb-1">Squad Registration</h4>
+                            <h4 className="text-sm font-semibold text-white mb-1">Squad Registration (10 Required, 2 Optional)</h4>
                             <p className="text-xs text-text-muted mb-4">Captain = Player 1 (captured above). Enter First &amp; Last Name for each player.</p>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div className="space-y-3">
                                 {/* Players 2–10 (required) */}
                                 {Array.from({ length: 9 }, (_, i) => i + 2).map((n) => (
-                                    <input
-                                        key={n}
-                                        type="text"
-                                        name={`Player_${n}`}
-                                        required
-                                        placeholder={`Player ${n} — First & Last Name (Required)`}
-                                        className={INPUT_CLASS}
-                                    />
+                                    <div key={n} className="flex items-center gap-3">
+                                        <span className="text-xs text-text-muted font-medium w-6 shrink-0 text-right tabular-nums">{n}.</span>
+                                        <div className="grid grid-cols-2 gap-2 flex-1">
+                                            <input
+                                                type="text"
+                                                name={`Player_${n}_First_Name`}
+                                                required
+                                                placeholder={`Player ${n} First Name`}
+                                                className={INPUT_CLASS}
+                                            />
+                                            <input
+                                                type="text"
+                                                name={`Player_${n}_Last_Name`}
+                                                required
+                                                placeholder={`Player ${n} Last Name`}
+                                                className={INPUT_CLASS}
+                                            />
+                                        </div>
+                                    </div>
                                 ))}
                                 {/* Players 11–12 (optional) */}
                                 {[11, 12].map((n) => (
-                                    <input
-                                        key={n}
-                                        type="text"
-                                        name={`Player_${n}`}
-                                        placeholder={`Player ${n} — First & Last Name (Optional)`}
-                                        className={INPUT_CLASS}
-                                    />
+                                    <div key={n} className="flex items-center gap-3">
+                                        <span className="text-xs text-text-muted font-medium w-6 shrink-0 text-right tabular-nums">{n}.</span>
+                                        <div className="grid grid-cols-2 gap-2 flex-1">
+                                            <input
+                                                type="text"
+                                                name={`Player_${n}_First_Name`}
+                                                placeholder={`Player ${n} First Name (Optional)`}
+                                                className={INPUT_CLASS}
+                                            />
+                                            <input
+                                                type="text"
+                                                name={`Player_${n}_Last_Name`}
+                                                placeholder={`Player ${n} Last Name (Optional)`}
+                                                className={INPUT_CLASS}
+                                            />
+                                        </div>
+                                    </div>
                                 ))}
                             </div>
                         </div>
