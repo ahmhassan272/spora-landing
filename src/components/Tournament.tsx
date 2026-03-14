@@ -276,13 +276,13 @@ export default function Tournament() {
                             <input type="tel" id="WhatsApp_Number" name="WhatsApp_Number" required placeholder={t('tournament', 'whatsappPlaceholder')} className={INPUT_CLASS} />
                         </div>
 
-                        {/* Squad Roster */}
                         <div>
                             <h4 className="text-sm font-semibold text-white mb-1">{t('tournament', 'squadTitle')}</h4>
-                            <p className="text-xs text-text-muted mb-4">{t('tournament', 'squadNote')}</p>
+                            <p className="text-xs text-text-muted mb-1">{t('tournament', 'squadNote')}</p>
+                            <p className="text-xs text-amber-400/80 italic mb-4">{t('tournament', 'squadMatchdayNote')}</p>
                             <div className="space-y-3">
-                                {/* Players 2–10 (required) */}
-                                {Array.from({ length: 9 }, (_, i) => i + 2).map((n) => (
+                                {/* Players 2–6 (required) */}
+                                {Array.from({ length: 5 }, (_, i) => i + 2).map((n) => (
                                     <div key={n} className="flex items-center gap-3">
                                         <span className="text-xs text-text-muted font-medium w-6 shrink-0 text-right tabular-nums">{n}.</span>
                                         <div className="grid grid-cols-2 gap-2 flex-1">
@@ -291,8 +291,8 @@ export default function Tournament() {
                                         </div>
                                     </div>
                                 ))}
-                                {/* Players 11–12 (optional) */}
-                                {[11, 12].map((n) => (
+                                {/* Players 7–12 (optional) */}
+                                {Array.from({ length: 6 }, (_, i) => i + 7).map((n) => (
                                     <div key={n} className="flex items-center gap-3">
                                         <span className="text-xs text-text-muted font-medium w-6 shrink-0 text-right tabular-nums">{n}.</span>
                                         <div className="grid grid-cols-2 gap-2 flex-1">
