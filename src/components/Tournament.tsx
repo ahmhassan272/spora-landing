@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Trophy, Calendar, Users, Video, BarChart3, Shield, Zap, Star, ArrowRight, Shirt, Clock, Timer } from 'lucide-react';
+import { Trophy, Calendar, Users, Video, BarChart3, Shield, Zap, Star, ArrowRight, MapPin, Timer } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 
 const INPUT_CLASS = "w-full px-4 py-3 rounded-xl bg-[#0d0d1a] border border-[#2a2a3a] text-white placeholder:text-[#555] text-sm focus:outline-none focus:border-spora focus:ring-1 focus:ring-spora transition-colors";
@@ -9,25 +9,24 @@ const INPUT_CLASS = "w-full px-4 py-3 rounded-xl bg-[#0d0d1a] border border-[#2a
 export default function Tournament() {
     const { t } = useLanguage();
 
-    /* ─── Format phases ─── */
+    /* ─── Format phases (3 cards now) ─── */
     const phases = [
         { icon: Shield, title: t('tournament', 'phase1Title'), desc: t('tournament', 'phase1Desc'), accent: 'from-emerald-500/20 to-teal-500/20' },
         { icon: Zap, title: t('tournament', 'phase2Title'), desc: t('tournament', 'phase2Desc'), accent: 'from-amber-500/20 to-orange-500/20' },
-        { icon: Trophy, title: t('tournament', 'phase3Title'), desc: t('tournament', 'phase3Desc'), accent: 'from-cyan-500/20 to-blue-500/20' },
-        { icon: Star, title: t('tournament', 'phase4Title'), desc: t('tournament', 'phase4Desc'), accent: 'from-purple-500/20 to-pink-500/20' },
+        { icon: Trophy, title: t('tournament', 'phase3Title'), desc: t('tournament', 'phase3Desc'), accent: 'from-purple-500/20 to-pink-500/20' },
     ];
 
     /* ─── Operations cards ─── */
     const opsCards = [
-        { icon: Shirt, title: t('tournament', 'opsMatchTitle'), items: [t('tournament', 'opsMatch1'), t('tournament', 'opsMatch2'), t('tournament', 'opsMatch3')] },
+        { icon: Timer, title: t('tournament', 'opsMatchTitle'), items: [t('tournament', 'opsMatch1'), t('tournament', 'opsMatch2'), t('tournament', 'opsMatch3')] },
         { icon: Video, title: t('tournament', 'opsMediaTitle'), items: [t('tournament', 'opsMedia1'), t('tournament', 'opsMedia2'), t('tournament', 'opsMedia3')] },
-        { icon: BarChart3, title: t('tournament', 'opsStatsTitle'), items: [t('tournament', 'opsStats1'), t('tournament', 'opsStats2'), t('tournament', 'opsStats3')] },
+        { icon: BarChart3, title: t('tournament', 'opsStatsTitle'), items: [t('tournament', 'opsStats1'), t('tournament', 'opsStats2'), t('tournament', 'opsStats3'), t('tournament', 'opsStats4')] },
     ];
 
     /* ─── Prizes ─── */
     const prizes = [
-        { emoji: '🥇', title: t('tournament', 'goldTitle'), items: [t('tournament', 'goldItem1'), t('tournament', 'goldItem2'), t('tournament', 'goldItem3'), t('tournament', 'goldItem4')], gold: true },
-        { emoji: '🥈🥉', title: t('tournament', 'podiumTitle'), items: [t('tournament', 'podiumDesc')], gold: false },
+        { emoji: '🥇', title: t('tournament', 'goldTitle'), items: [t('tournament', 'goldItem1'), t('tournament', 'goldItem2'), t('tournament', 'goldItem3'), t('tournament', 'goldItem4'), t('tournament', 'goldItem5')], gold: true },
+        { emoji: '🥈', title: t('tournament', 'silverTitle'), items: [t('tournament', 'silverDesc')], gold: false },
         { emoji: '🏅', title: t('tournament', 'individualTitle'), items: [t('tournament', 'individualMvp'), t('tournament', 'individualScorer'), t('tournament', 'individualAssist'), t('tournament', 'individualKeeper')], gold: false },
     ];
 
@@ -36,6 +35,8 @@ export default function Tournament() {
         { icon: Calendar, text: t('tournament', 'badgeDate') },
         { icon: Users, text: t('tournament', 'badgeTeams') },
         { icon: Shield, text: t('tournament', 'badgeGames') },
+        { icon: MapPin, text: t('tournament', 'badgeVenue') },
+        { icon: Calendar, text: t('tournament', 'badgeWeeks') },
     ];
 
     return (
@@ -56,11 +57,18 @@ export default function Tournament() {
                         <Trophy size={14} />
                         {t('tournament', 'newSeason')}
                     </div>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-3 leading-tight">
                         {t('tournament', 'title')}
                         <br />
                         <span className="text-spora">{t('tournament', 'titleAccent')}</span>
                     </h2>
+
+                    {/* Socca Hungary Official Badge */}
+                    <div className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-amber-500/10 border border-amber-500/30 mb-5">
+                        <span className="text-amber-400 text-lg">🇭🇺</span>
+                        <span className="text-amber-400 text-sm font-bold uppercase tracking-wide">{t('tournament', 'officialBadge')}</span>
+                    </div>
+
                     <p className="text-text-secondary text-base sm:text-lg max-w-2xl mx-auto mb-8">
                         {t('tournament', 'subtitle')}
                     </p>
@@ -83,7 +91,7 @@ export default function Tournament() {
                     className="mb-14"
                 >
                     <h3 className="text-xl sm:text-2xl font-bold text-white mb-6 text-center">{t('tournament', 'formatTitle')}</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         {phases.map((p, i) => {
                             const Icon = p.icon;
                             return (
@@ -96,33 +104,6 @@ export default function Tournament() {
                                 </div>
                             );
                         })}
-                    </div>
-                </motion.div>
-
-                {/* ─── SCHEDULE & LOGISTICS ─── */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.12 }}
-                    className="mb-14"
-                >
-                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-6 text-center">{t('tournament', 'scheduleTitle')}</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div className="rounded-2xl bg-card border border-border p-6">
-                            <Timer size={24} className="text-spora mb-3" />
-                            <p className="text-sm text-text-secondary leading-relaxed">{t('tournament', 'scheduleMatch')}</p>
-                        </div>
-                        <div className="rounded-2xl bg-card border border-border p-6">
-                            <Shield size={24} className="text-spora mb-3" />
-                            <p className="text-sm text-text-secondary leading-relaxed">{t('tournament', 'scheduleRule')}</p>
-                        </div>
-                        <div className="rounded-2xl bg-card border border-border p-6">
-                            <Clock size={24} className="text-spora mb-3" />
-                            <h4 className="font-bold text-white mb-2 text-sm">{t('tournament', 'scheduleShiftsTitle')}</h4>
-                            <p className="text-sm text-text-secondary">{t('tournament', 'scheduleAfternoon')}</p>
-                            <p className="text-sm text-text-secondary">{t('tournament', 'scheduleEvening')}</p>
-                        </div>
                     </div>
                 </motion.div>
 
@@ -166,7 +147,7 @@ export default function Tournament() {
                 >
                     <h3 className="text-xl sm:text-2xl font-bold text-white mb-6 text-center">{t('tournament', 'financesTitle')}</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {/* Entrance Fee = ZERO */}
+                        {/* Registration = ZERO */}
                         <div className="rounded-2xl bg-card border border-spora/30 p-6 relative overflow-hidden">
                             <div className="absolute top-0 right-0 px-3 py-1 bg-spora text-black text-[10px] font-bold uppercase tracking-wider rounded-bl-xl">FREE</div>
                             <p className="text-sm text-text-muted uppercase tracking-wider mb-2">{t('tournament', 'entranceFee')}</p>
@@ -175,9 +156,7 @@ export default function Tournament() {
                         </div>
                         {/* Match Fee */}
                         <div className="rounded-2xl bg-card border border-border p-6 relative overflow-hidden">
-                            <div className="absolute top-0 right-0 px-3 py-1 bg-gray-700 text-text-muted text-[10px] font-bold uppercase tracking-wider rounded-bl-xl">
-                                /match
-                            </div>
+                            <div className="absolute top-0 right-0 px-3 py-1 bg-gray-700 text-text-muted text-[10px] font-bold uppercase tracking-wider rounded-bl-xl">/match</div>
                             <p className="text-sm text-text-muted uppercase tracking-wider mb-2">{t('tournament', 'matchFeeLabel')}</p>
                             <p className="text-4xl font-extrabold text-white mb-1">{t('tournament', 'matchFeeValue')} <span className="text-lg font-medium text-text-muted">HUF</span></p>
                             <p className="text-sm text-text-secondary">{t('tournament', 'matchFeeDesc')}</p>
@@ -276,6 +255,7 @@ export default function Tournament() {
                             <input type="tel" id="WhatsApp_Number" name="WhatsApp_Number" required placeholder={t('tournament', 'whatsappPlaceholder')} className={INPUT_CLASS} />
                         </div>
 
+                        {/* Squad Roster */}
                         <div>
                             <h4 className="text-sm font-semibold text-white mb-1">{t('tournament', 'squadTitle')}</h4>
                             <p className="text-xs text-text-muted mb-1">{t('tournament', 'squadNote')}</p>
