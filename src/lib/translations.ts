@@ -118,7 +118,7 @@ export const translations = {
         goldTitle: { en: 'Gold Cup Champions', hu: 'Arany Kupa Bajnok' },
         goldItem1: { en: 'Socca Hungary scouting / National Team pool', hu: 'Socca Hungary felderítés / Válogatott keret' },
         goldItem2: { en: 'BeStrong Trial invite', hu: 'BeStrong próbaedzés meghívó' },
-        goldItem3: { en: 'VIP Team Dinner', hu: 'VIP Csapat Vacsora' },
+        goldItem3: { en: 'VIP Dinner', hu: 'VIP Vacsora' },
         goldItem4: { en: 'Physical Trophy', hu: 'Fizikai Trófea' },
         goldItem5: { en: 'FREE entry to next tournament', hu: 'INGYENES nevezés a következő tornára' },
         silverTitle: { en: 'Silver Cup Champions', hu: 'Silver Kupa Bajnok' },
