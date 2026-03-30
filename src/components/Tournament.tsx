@@ -35,7 +35,6 @@ export default function Tournament() {
         { icon: Calendar, text: t('tournament', 'badgeDate') },
         { icon: Users, text: t('tournament', 'badgeTeams') },
         { icon: Shield, text: t('tournament', 'badgeGames') },
-        { icon: MapPin, text: t('tournament', 'badgeVenue') },
         { icon: Calendar, text: t('tournament', 'badgeWeeks') },
     ];
 

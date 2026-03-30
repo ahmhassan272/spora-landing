@@ -67,7 +67,7 @@ export const translations = {
         badgeDate: { en: 'Kickoff: April 4-5, 2026', hu: 'Kezdés: 2026. Április 4-5.' },
         badgeTeams: { en: 'Strictly 16 Teams', hu: 'Szigorúan 16 Csapat' },
         badgeGames: { en: '6-Game Guarantee', hu: '6 Meccs Garancia' },
-        badgeVenue: { en: 'BeStrong Pitches, Debrecen', hu: 'BeStrong Pályák, Debrecen' },
+
         badgeWeeks: { en: '3 Weekends (Sat & Sun)', hu: '3 Hétvége (Szo & Vas)' },
 
         /* Format */
@@ -118,7 +118,7 @@ export const translations = {
         goldTitle: { en: 'Gold Cup Champions', hu: 'Arany Kupa Bajnok' },
         goldItem1: { en: 'Socca Hungary scouting / National Team pool', hu: 'Socca Hungary felderítés / Válogatott keret' },
         goldItem2: { en: 'BeStrong Trial invite', hu: 'BeStrong próbaedzés meghívó' },
-        goldItem3: { en: 'VIP Team Dinner at Mélange', hu: 'VIP Csapat Vacsora a Mélange-ban' },
+        goldItem3: { en: 'VIP Team Dinner', hu: 'VIP Csapat Vacsora' },
         goldItem4: { en: 'Physical Trophy', hu: 'Fizikai Trófea' },
         goldItem5: { en: 'FREE entry to next tournament', hu: 'INGYENES nevezés a következő tornára' },
         silverTitle: { en: 'Silver Cup Champions', hu: 'Silver Kupa Bajnok' },
