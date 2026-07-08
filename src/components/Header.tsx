@@ -14,8 +14,8 @@ export default function Header() {
         { label: t('nav', 'features'), href: '#features' },
         { label: t('nav', 'venues'), href: '#venues' },
         { label: t('nav', 'tournament'), href: '#tournament' },
-        { label: 'Contact', href: '/contact' },
-        { label: 'Privacy', href: '/privacy' },
+        { label: t('nav', 'contact'), href: '/contact' },
+        { label: t('nav', 'privacy'), href: '/privacy' },
     ];
 
     return (

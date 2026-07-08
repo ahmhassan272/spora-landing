@@ -3,6 +3,8 @@ export const translations = {
         features: { en: 'Features', hu: 'Funkciók' },
         venues: { en: 'Venues', hu: 'Helyszínek' },
         tournament: { en: 'Tournament', hu: 'Torna' },
+        contact: { en: 'Contact', hu: 'Kapcsolat' },
+        privacy: { en: 'Privacy', hu: 'Adatvédelem' },
         bookNow: { en: 'Book Now', hu: 'Foglalj Most' },
     },
     hero: {
@@ -175,6 +177,15 @@ export const translations = {
         contact: { en: 'Contact', hu: 'Kapcsolat' },
         whatsapp: { en: 'WhatsApp', hu: 'WhatsApp' },
         email: { en: 'admin@spora-hu.app', hu: 'admin@spora-hu.app' },
+    },
+    support: {
+        title: { en: 'Contact Support', hu: 'Kapcsolatfelvétel' },
+        intro: {
+            en: 'Need help with your Spora court booking? Contact our support team. We aim to respond to all inquiries within 24 hours.',
+            hu: 'Segítségre van szüksége a Spora pályafoglalással kapcsolatban? Lépjen kapcsolatba ügyfélszolgálatunkkal. Célunk, hogy minden megkeresésre 24 órán belül válaszoljunk.'
+        },
+        emailUs: { en: 'Email Us', hu: 'Küldjön E-mailt' },
+        phone: { en: 'Phone / WhatsApp', hu: 'Telefon / WhatsApp' }
     },
 } as const;
 

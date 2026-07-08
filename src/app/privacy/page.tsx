@@ -5,20 +5,22 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Shield, ChevronDown } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function PrivacyPage() {
+    const { t } = useLanguage();
     const [openSection, setOpenSection] = useState<string | null>(null);
 
     const sections = [
         { 
             key: 'privacy', 
-            title: 'Privacy Policy', 
-            content: 'Content coming soon...' 
+            title: t('legal', 'privacyTitle'), 
+            content: t('legal', 'privacyContent') 
         },
         { 
             key: 'terms', 
-            title: 'Terms of Service', 
-            content: 'Spora Digital Kft. provides a digital intermediary service for amateur sports organization. We do not own or operate any sports venues. Venue availability, pricing, and conditions are set by the respective venue operators. Spora facilitates bookings and payments but is not liable for venue conditions, player injuries, or disputes between users. The split-payment system requires all designated players to complete payment within 2 hours of the initial booking, or the reservation is automatically released. Tournament entry fees are non-refundable once registration is confirmed. All users must be 16 years of age or older. These terms are governed by Hungarian law.' 
+            title: t('legal', 'termsTitle'), 
+            content: t('legal', 'termsContent') 
         },
     ];
 
@@ -34,7 +36,7 @@ export default function PrivacyPage() {
                         className="text-center mb-10"
                     >
                         <Shield size={32} className="text-spora mx-auto mb-4" />
-                        <h1 className="text-3xl font-bold">Legal</h1>
+                        <h1 className="text-3xl font-bold">{t('legal', 'title')}</h1>
                     </motion.div>
 
                     <div className="space-y-4">
