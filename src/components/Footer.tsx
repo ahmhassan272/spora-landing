@@ -4,14 +4,15 @@ import { motion } from 'framer-motion';
 import { MessageCircle, Mail } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Footer() {
     const { t } = useLanguage();
 
     const quickLinks = [
-        { label: t('nav', 'features'), href: '#features' },
-        { label: t('nav', 'venues'), href: '#venues' },
-        { label: t('nav', 'tournament'), href: '#tournament' },
+        { label: t('nav', 'features'), href: '/#features' },
+        { label: t('nav', 'venues'), href: '/#venues' },
+        { label: t('nav', 'tournament'), href: '/#tournament' },
         { label: t('legal', 'privacyTitle'), href: '/privacy' },
     ];
 
@@ -36,12 +37,12 @@ export default function Footer() {
                         <ul className="space-y-2">
                             {quickLinks.map((link) => (
                                 <li key={link.href}>
-                                    <a
+                                    <Link
                                         href={link.href}
                                         className="text-sm text-text-secondary hover:text-spora transition-colors"
                                     >
                                         {link.label}
-                                    </a>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>

@@ -5,15 +5,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Globe } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Header() {
     const { lang, setLang, t } = useLanguage();
     const [mobileOpen, setMobileOpen] = useState(false);
 
     const navLinks = [
-        { label: t('nav', 'features'), href: '#features' },
-        { label: t('nav', 'venues'), href: '#venues' },
-        { label: t('nav', 'tournament'), href: '#tournament' },
+        { label: t('nav', 'features'), href: '/#features' },
+        { label: t('nav', 'venues'), href: '/#venues' },
+        { label: t('nav', 'tournament'), href: '/#tournament' },
         { label: t('nav', 'contact'), href: '/contact' },
         { label: t('nav', 'privacy'), href: '/privacy' },
     ];
@@ -27,21 +28,21 @@ export default function Header() {
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
                 {/* Logo */}
-                <a href="#" className="flex items-center gap-2">
+                <Link href="/" className="flex items-center gap-2">
                     <Image src="/logo1.png" alt="Spora" width={40} height={40} className="rounded-lg" />
                     <span className="text-xl font-bold text-spora tracking-tight hidden sm:inline">SPORA</span>
-                </a>
+                </Link>
 
                 {/* Desktop Nav */}
                 <nav className="hidden md:flex items-center gap-8">
                     {navLinks.map((link) => (
-                        <a
+                        <Link
                             key={link.href}
                             href={link.href}
                             className="text-sm text-text-secondary hover:text-spora transition-colors duration-200"
                         >
                             {link.label}
-                        </a>
+                        </Link>
                     ))}
                 </nav>
 
@@ -88,14 +89,14 @@ export default function Header() {
                     >
                         <div className="px-4 py-4 flex flex-col gap-3">
                             {navLinks.map((link) => (
-                                <a
+                                <Link
                                     key={link.href}
                                     href={link.href}
                                     onClick={() => setMobileOpen(false)}
                                     className="text-base text-text-secondary hover:text-spora transition-colors py-2"
                                 >
                                     {link.label}
-                                </a>
+                                </Link>
                             ))}
                             <a
                                 href="https://wa.me/36702538983"
