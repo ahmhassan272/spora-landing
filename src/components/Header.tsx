@@ -16,7 +16,7 @@ export default function Header() {
         { label: t('nav', 'venues'), href: '/#venues' },
         { label: t('nav', 'tournament'), href: '/#tournament' },
         { label: t('nav', 'contact'), href: '/contact' },
-        { label: t('nav', 'privacy'), href: '/privacy' },
+        { label: t('privacyPolicyFull', 'title'), href: '/privacy-policy' },
     ];
 
     return (

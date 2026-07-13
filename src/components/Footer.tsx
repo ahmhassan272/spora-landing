@@ -13,7 +13,7 @@ export default function Footer() {
         { label: t('nav', 'features'), href: '/#features' },
         { label: t('nav', 'venues'), href: '/#venues' },
         { label: t('nav', 'tournament'), href: '/#tournament' },
-        { label: t('legal', 'privacyTitle'), href: '/privacy' },
+        { label: t('privacyPolicyFull', 'title'), href: '/privacy-policy' },
     ];
 
     return (
